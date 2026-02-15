@@ -1,5 +1,5 @@
 # FOR THE NEXT PERSON 
-  - Make intFSM.h and intFSM.cpp
+  - Make intFSM.h and intFSM.cpp 
 
 # FOR THE NEXT PERSON AFTER THAT
   - Make realFSM.h and realFSM.cpp
@@ -14,5 +14,5 @@
 ## Folders what they do
 - include/ = headers
 - src/ = .cpp files
-- tests/  = optional test inputs later WHEN WE GET THERE 
+- tests/  = DONT NEED TO UPLOAD TO THE GITHUB CAN MAKE YOUR OWN FOLDER IN LOCAL REPO
 
