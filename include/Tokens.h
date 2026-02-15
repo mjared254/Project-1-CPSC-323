@@ -9,3 +9,20 @@ const int T_Operator = 5;
 const int T_Seperator = 6;
 const int T_UnknownTokenType = 7;
 const int T_FileEnd = 8;
+
+struct Token {  // Lexeme's return 
+    int tokenCategory = T_UnknownTokenType;
+    std::string lexeme;   // Text from input (Token actual value)
+    int numberLine = 1;    
+};
+
+inline std::string tokenName(int a) {   // takes the token identification into the printed name 
+  if (a == T_Identifier) return "Identifier";
+  if (a == T_Keyword) return "Keyword";
+  if (a == T_Integer) return "Integer";
+  if (a == T_Real) return "Real";
+  if (a == T_Operator) return "Operator";
+  if (a == T_Seperator) return "Separator";
+  if (a == T_FileEnd) return "EOF";
+  return "Unknown";
+}
