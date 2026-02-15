@@ -1,5 +1,5 @@
-# pragma once       // prevents header being used more then once per .cpp file
-# include <string> 
+#pragma once       // prevents header being used more then once per .cpp file
+#include <string> 
 
 const int T_Identifier = 1;   // These are the token idetification codes with int assignment
 const int T_Keyword = 2;
