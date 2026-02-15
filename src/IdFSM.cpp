@@ -19,10 +19,6 @@ bool IDFSM::isAnumber_(char c) const
     return (c >= '0' && c <= '9'); //from 0 -> 9
 }
 
-bool IDFSM::isAnumber_(char c) const {
-    return (c >= '0' && c <= '9');
-}
-
 bool IDFSM::makeCheck(char c) 
 { // Takes ONE character from the text into the FSM and checks
     if (state_ == State_End)    //  to see if we keep going till fase to end the current state
