@@ -21,4 +21,4 @@ private:
 
     bool isAletter_(char c) const;      // chekcs if a letter true or false
     bool isAnumber_(char c) const;      // checks if a number true or false
-}
+};
