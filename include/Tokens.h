@@ -23,6 +23,6 @@ inline std::string tokenName(int a) {   // takes the token identification into t
   if (a == T_Real) return "Real";
   if (a == T_Operator) return "Operator";
   if (a == T_Seperator) return "Separator";
-  if (a == T_FileEnd) return "EOF";
+  if (a == T_FileEnd) return "End of file";
   return "Unknown";
 }
