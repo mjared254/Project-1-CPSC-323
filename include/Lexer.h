@@ -8,6 +8,13 @@
 
 class Lexer {
 public:
+    Lexer(); // CREATION LEXER 
+
+    Lexer(const std::string& inputText); // LEXER with text
+
+    void replaceinput(const std::string& inputText); // replaces the input
+
+    Token move_to_token(); // For lexer to read next token 
 
 
 private:
