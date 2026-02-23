@@ -7,23 +7,28 @@
 class rFSM {
     public:
 
-    bool r_Check(const std::string & input);
+    rFSM();
+    void rFSMstart();
+    bool makeCheck(char c);
+    bool validTokenAccept() const;
+    bool startReal(const std::string & j);
+
+
 
     private:
 
     enum class State {
-        START,
-        INT,
-        DECIMAL_AFTER,
-        FRACTION_NUM,
-        DECIMAL_NO_INT,
-        EXPONENTIAL_SIGN,
-        EXPONENTIAL_DIGIT
+        Start,
+        Integer,
+        NoDecimalInt,
+        Fraction,
+        DecimalAfterInt,
+        Exponent,
+        ExponentSign,
+        ExponentDigits
     };
 
-    State current_state;
+    State state_ = State::Start;
 
-    State transition_handler(State cur_transition, char inputChar);
-
-    State accept_input(State validate);
+    bool isDigit_(char c) const;
 };
