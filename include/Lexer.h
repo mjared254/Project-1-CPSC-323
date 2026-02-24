@@ -10,14 +10,11 @@
 
 class Lexer {
 public:
-    Lexer(); // CREATION LEXER 
+    Token lexer(); // CREATION lexer() function in requirements which will be called 
 
-    Lexer(const std::string& inputText); // LEXER with text
+    explicit Lexer(const std::string& filename); // loads the lexer with file to memory
 
-    void replaceinput(const std::string& inputText); // replaces the input
-
-    Token shiftToken(); // For lexer to read next token 
-
+    bool isOpen() const; 
 
 private:
 
