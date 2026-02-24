@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
 #include "Tokens.h"
 #include "IdFSM.h"
 #include "IntFSM.h"
@@ -14,23 +16,33 @@ public:
 
     void replaceinput(const std::string& inputText); // replaces the input
 
-    Token move_to_token(); // For lexer to read next token 
+    Token shiftToken(); // For lexer to read next token 
 
 
 private:
-    std::string input_;
-    size_t i_;
-    int line_;
 
-    // FSMs >>>>
-    IdFSM id_;
-    IntFSM integer_;
-    RealFSM real_;
+    bool fileOpened_ = false;
+    std::string source_;
+    int index_ = 0;     // current character
+    int line_ = 1;      // line number 
 
-    void skip_();      
-    bool end_() const;
-    char peek_(size_t off = 0) const;
+    IDFSM idFsm_; // our FSM's
+    INTFSM intFsm_;
+    rFSM realFsm_;
 
+    std::vector<std::string> keywords_; // LIST FOR KEYWORDS
+
+    void keywordload_();
     bool keyword_(const std::string& s) const;
-    std::string lower_(std::string s) const;
+
+    void emptyspaceSKIPPING_();
+    bool commentstart_() const;
+    void commentskip_();
+
+    int realLength_(int startIndex);
+
+    bool isLetter_(char c) const;
+    bool isDigit_(char c) const;
+
+    Token createToken_(int category, const std::string& lexeme);
 };
