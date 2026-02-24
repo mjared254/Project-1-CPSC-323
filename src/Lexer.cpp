@@ -58,5 +58,30 @@ bool Lexer::keyword_(const std::string& s) const
     return false;
 }
 
+// COMMENT FOCUS --- 
+bool Lexer::commentstart_() const {// If it starts with a comment 
+
+    if (index_ + 1 >= (int)source_.size())
+        return false;
+
+    return (source_[index_] == '/' && source_[index_ + 1] == '*');
+}
+
+void Lexer::commentskip_() {
+
+    index_ += 2; // positioned at / of /*
+    while (index_ < (int)source_.size()) {
+        if (source_[index_] == '\n')
+            line_++;
+
+        if (index_ + 1 < (int)source_.size() &&  // end comment */
+            source_[index_] == '*' && source_[index_ + 1] == '/') {
+            index_ += 2;
+            return;
+        }
+        index_++;
+    }
+}
+
 
 
