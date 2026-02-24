@@ -186,7 +186,14 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
         return createToken_(T_Integer, lex);
     }
 
+    if (index_ + 1 < (int)source_.size()) { // operators with 2 characters (Comparative opperations)
+        std::string two = source_.substr(index_, 2);
 
+        if (two == "==" || two == "!=" || two == "<=" || two == "=>") {
+            index_ += 2;
+            return createToken_(T_Operator, two);
+        }
+    }
 
 
 }
