@@ -83,5 +83,27 @@ void Lexer::commentskip_() {
     }
 }
 
+void Lexer::emptyspaceSKIPPING_() { // for the whitespaces and comments 
+    while (index_ < (int)source_.size()) {
+        char c = source_[index_];
+
+        if (c == ' ' || c == '\t' || c == '\r') { // whitespace
+            index_++;
+            continue;
+        }
+        if (c == '\n') { // newlines
+            line_++;
+            index_++;
+            continue;
+        }
+        if (commentstart_()) { // comments
+            commentskip_();
+            continue;
+        }
+
+        break;
+    }
+}
+
 
 
