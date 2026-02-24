@@ -19,3 +19,14 @@ Lexer::Lexer(const std::string& filename) { //LOAD the file into the source_
     index_ = 0;
     line_ = 1;
 }
+
+// FILE CHEK INFORMATION
+bool Lexer::isOpen() const {
+    return fileOpened_;
+}
+bool Lexer::isLetter_(char c) const{
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+bool Lexer::isDigit_(char c) const{
+    return (c >= '0' && c <= '9');
+}
