@@ -143,7 +143,7 @@ Token Lexer::createToken_(int category, const std::string& lexeme) // MAKE TOKEN
     t.tokenCategory = category;
     t.lexeme = lexeme;
     t.numberLine = line_;
-    
+
     return t;
 }
 
@@ -202,5 +202,11 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
         }
     }
 
+    if (c == '@' || c == '(' || c == ')' || c == '{' || c == '}' || c == ';' || c == ',') { // seperators list 
+        index_++;
+        return createToken_(T_Seperator, std::string(1, c));
+    }
 
+    index_++;
+    return createToken_(T_UnknownTokenType, std::string(1, c)); // unknown token type 
 }
