@@ -188,10 +188,6 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
         return createToken_(T_Integer, lex);
     }
 
-    if (c == '>' || c == '<' || c == '=' || c == '+' || c == '-' || c == '*' || c == '/') { // one character operations
-        index_++;
-        return createToken_(T_Operator, std::string(1, c));
-    }
 
     if (index_ + 1 < (int)source_.size()) { // operators with 2 characters (Comparative opperations)
         std::string two = source_.substr(index_, 2);
@@ -201,7 +197,12 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
             return createToken_(T_Operator, two);
         }
     }
-
+    
+    if (c == '>' || c == '<' || c == '=' || c == '+' || c == '-' || c == '*' || c == '/') { // one character operations
+        index_++;
+        return createToken_(T_Operator, std::string(1, c));
+    }
+    
     if (c == '@' || c == '(' || c == ')' || c == '{' || c == '}' || c == ';' || c == ',') { // seperators list 
         index_++;
         return createToken_(T_Seperator, std::string(1, c));
