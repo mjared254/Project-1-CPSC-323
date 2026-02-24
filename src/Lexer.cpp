@@ -136,5 +136,15 @@ void Lexer::emptyspaceSKIPPING_() { // for the whitespaces and comments
     }
 }
 
+Token Lexer::createToken_(int category, const std::string& lexeme) // MAKE TOKEN
+{
+    Token t;
+    t.tokenCategory = category;
+    t.lexeme = lexeme;
+    t.numberLine = line_;
+    return t;
+}
 
+Token Lexer::lexer() { // MAIN LEXER function = gets one token per time 
 
+}
