@@ -83,6 +83,38 @@ void Lexer::commentskip_() {
     }
 }
 
+int Lexer::realLength_(int startIndex) 
+{
+    realFsm_.rFSMstart();
+
+    int i = startIndex;
+    int acceptedlength = 0;
+
+    bool dot = false;
+    bool Intwithdot = false;
+
+    while (i < (int)source_.size()) {
+        char c = source_[i];
+
+        if (!realFsm_.makeCheck(c))
+            break;
+
+        if (c == '.')
+            dot = true;
+
+        if (dot && isDigit_(c))
+            Intwithdot = true;
+
+        if (realFsm_.validTokenAccept() && dot && Intwithdot) {
+            acceptedlength = (i - startIndex) + 1;
+        }
+
+        i++;
+    }
+
+    return acceptedlength;
+}
+
 void Lexer::emptyspaceSKIPPING_() { // for the whitespaces and comments 
     while (index_ < (int)source_.size()) {
         char c = source_[index_];
@@ -100,7 +132,6 @@ void Lexer::emptyspaceSKIPPING_() { // for the whitespaces and comments
             commentskip_();
             continue;
         }
-
         break;
     }
 }
