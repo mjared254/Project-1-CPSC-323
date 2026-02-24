@@ -139,9 +139,11 @@ void Lexer::emptyspaceSKIPPING_() { // for the whitespaces and comments
 Token Lexer::createToken_(int category, const std::string& lexeme) // MAKE TOKEN
 {
     Token t;
+
     t.tokenCategory = category;
     t.lexeme = lexeme;
     t.numberLine = line_;
+    
     return t;
 }
 
@@ -184,6 +186,11 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
         std::string lex = source_.substr(index_, intLen);
         index_ += intLen;
         return createToken_(T_Integer, lex);
+    }
+
+    if (c == '>' || c == '<' || c == '=' || c == '+' || c == '-' || c == '*' || c == '/') { // one character operations
+        index_++;
+        return createToken_(T_Operator, std::string(1, c));
     }
 
     if (index_ + 1 < (int)source_.size()) { // operators with 2 characters (Comparative opperations)
