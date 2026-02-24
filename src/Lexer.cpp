@@ -155,7 +155,7 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
 
     char c = source_[index_];
 
-    if (isLetter_(c)) { // Identifies if a keyword
+    if (isLetter_(c)) { // Identifer, Keyword
         int len = idFsm_.startIdentifier(source_, index_); 
         std::string lex = source_.substr(index_, len);
         index_ += len;
@@ -166,7 +166,7 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
         return createToken_(T_Identifier, lex);
     }
     
-    if (isDigit_(c)) { // Identifies if an Integer / Real
+    if (isDigit_(c)) { // Interger, Real
         int intLen = intFsm_.startInteger(source_, index_);
 
         int realLen = 0;
@@ -186,7 +186,7 @@ Token Lexer::lexer() { // MAIN LEXER function = gets one token per time
         return createToken_(T_Integer, lex);
     }
 
-    
+
 
 
 }
