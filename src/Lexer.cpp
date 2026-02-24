@@ -49,6 +49,14 @@ void Lexer::keywordload_()
     keywords_.push_back("false");
 }
 
+bool Lexer::keyword_(const std::string& s) const
+{
+    for (int i = 0; i < (int)keywords_.size(); i++) {
+        if (keywords_[i] == s)
+         return true;
+    }
+    return false;
+}
 
 
 
