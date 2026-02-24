@@ -146,5 +146,47 @@ Token Lexer::createToken_(int category, const std::string& lexeme) // MAKE TOKEN
 }
 
 Token Lexer::lexer() { // MAIN LEXER function = gets one token per time 
+    
+    emptyspaceSKIPPING_();
+
+    if (index_ >= (int)source_.size()) {
+        return createToken_(T_FileEnd, "EOF"); // EOFF
+    }
+
+    char c = source_[index_];
+
+    if (isLetter_(c)) { // Identifies if a keyword
+        int len = idFsm_.startIdentifier(source_, index_); 
+        std::string lex = source_.substr(index_, len);
+        index_ += len;
+
+        if (keyword_(lex))
+            return createToken_(T_Keyword, lex);
+
+        return createToken_(T_Identifier, lex);
+    }
+    
+    if (isDigit_(c)) { // Identifies if an Integer / Real
+        int intLen = intFsm_.startInteger(source_, index_);
+
+        int realLen = 0;
+        if (intLen > 0 && (index_ + intLen) < (int)source_.size() && // only if . after integer section 
+            source_[index_ + intLen] == '.') {
+            realLen = realLength_(index_);
+        }
+
+        if (realLen > 0) {
+            std::string lex = source_.substr(index_, realLen);
+            index_ += realLen;
+            return createToken_(T_Real, lex);
+        }
+
+        std::string lex = source_.substr(index_, intLen);
+        index_ += intLen;
+        return createToken_(T_Integer, lex);
+    }
+
+    
+
 
 }
